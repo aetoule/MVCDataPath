@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MVCApp.Models;
 
 namespace MVCApp.Controllers
 {
@@ -24,6 +25,26 @@ namespace MVCApp.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        public ActionResult SignUp()
+        {
+            ViewBag.Message = "Employee Sign";
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SignUp(EmployeeModel model)
+        {
+            // it will post the data and then if it comes back as valid,
+            // then it will redirect back to home page
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
             return View();
         }
     }
